@@ -1,0 +1,501 @@
+/* ============================================================
+   FANTASY REALM — GLOBAL STYLES & DESIGN SYSTEM
+   CSS Custom Properties di-inject oleh ThemeContext.tsx
+   File ini berisi: default fallback, base styles, utility classes,
+   keyframe animations, responsive typography
+   ============================================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────
+   FONT IMPORTS
+   Font di-load via <link> di layout.tsx
+   untuk performa yang lebih baik
+   ───────────────────────────────────────── */
+
+/* ─────────────────────────────────────────
+   CSS CUSTOM PROPERTIES — DEFAULT VALUES
+   Akan di-override oleh ThemeContext saat mount
+   ───────────────────────────────────────── */
+:root {
+  /* ── Background ── */
+  --color-bg-primary:      #05030F;
+  --color-bg-secondary:    #0A0618;
+  --color-bg-tertiary:     #110B24;
+  --color-bg-glass:        rgba(17, 11, 36, 0.6);
+
+  /* ── Primary ── */
+  --color-primary:         #7C3AED;
+  --color-primary-glow:    rgba(124, 58, 237, 0.4);
+  --color-primary-light:   #A78BFA;
+
+  /* ── Secondary ── */
+  --color-secondary:       #2563EB;
+  --color-secondary-glow:  rgba(37, 99, 235, 0.35);
+  --color-secondary-light: #60A5FA;
+
+  /* ── Accent ── */
+  --color-accent:          #F59E0B;
+  --color-accent-glow:     rgba(245, 158, 11, 0.4);
+
+  /* ── Text ── */
+  --color-text-primary:    #F3F0FF;
+  --color-text-secondary:  #C4B5FD;
+  --color-text-muted:      #6B5FA0;
+
+  /* ── Border ── */
+  --color-border-primary:  rgba(124, 58, 237, 0.3);
+  --color-border-glow:     rgba(124, 58, 237, 0.6);
+
+  /* ── Background Effects ── */
+  --color-star:            #E0D7FF;
+  --color-aurora-1:        #7C3AED;
+  --color-aurora-2:        #2563EB;
+  --color-particle:        #A78BFA;
+  --color-fog:             rgba(124, 58, 237, 0.08);
+
+  /* ── Gradients ── */
+  --gradient-hero-bg:      radial-gradient(ellipse at 50% 0%, #1A0A3C 0%, #05030F 60%);
+  --gradient-card-bg:      linear-gradient(135deg, rgba(17,11,36,0.9) 0%, rgba(10,6,24,0.95) 100%);
+  --gradient-text:         linear-gradient(135deg, #F3F0FF 0%, #A78BFA 50%, #F59E0B 100%);
+  --gradient-button:       linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%);
+  --gradient-glow:         radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%);
+  --gradient-overlay:      linear-gradient(to bottom, transparent 0%, rgba(5,3,15,0.8) 100%);
+
+  /* ── Shadows ── */
+  --shadow-glow-primary:   0 0 20px rgba(124,58,237,0.5), 0 0 60px rgba(124,58,237,0.2);
+  --shadow-glow-secondary: 0 0 20px rgba(37,99,235,0.5), 0 0 60px rgba(37,99,235,0.2);
+  --shadow-card:           0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+
+  /* ── Blur ── */
+  --blur-glass:            blur(16px);
+  --blur-modal:            blur(24px);
+
+  /* ── Typography ── */
+  --font-display:          'Cinzel', serif;
+  --font-body:             'Inter', sans-serif;
+  --font-mono:             'JetBrains Mono', monospace;
+
+  /* ── Transition ── */
+  --transition-theme:      background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  --transition-fast:       150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal:     300ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow:       500ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-cinematic:  800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─────────────────────────────────────────
+   BASE RESET & BODY
+   ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: var(--transition-theme);
+}
+
+/* ─────────────────────────────────────────
+   CUSTOM SCROLLBAR
+   ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
+}
+
+/* ─────────────────────────────────────────
+   SELECTION COLOR
+   ───────────────────────────────────────── */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-text-primary);
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE TYPOGRAPHY
+   Fluid type scale — elegan di semua device
+   ───────────────────────────────────────── */
+@layer base {
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  h3, h4, h5, h6 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   UTILITY CLASSES — DESIGN SYSTEM
+   Semua utility berbasis CSS variables
+   ═══════════════════════════════════════════ */
+@layer utilities {
+
+  /* ── GLASSMORPHISM LEVELS ── */
+  .glass-thin {
+    background: rgba(17, 11, 36, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(124, 58, 237, 0.12);
+  }
+  .glass {
+    background: var(--color-bg-glass);
+    backdrop-filter: var(--blur-glass);
+    -webkit-backdrop-filter: var(--blur-glass);
+    border: 1px solid var(--color-border-primary);
+  }
+  .glass-strong {
+    background: var(--color-bg-glass);
+    backdrop-filter: var(--blur-modal);
+    -webkit-backdrop-filter: var(--blur-modal);
+    border: 1px solid var(--color-border-glow);
+  }
+  .glass-frosted {
+    background: rgba(17, 11, 36, 0.75);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid var(--color-border-glow);
+  }
+
+  /* ── GRADIENT TEXT ── */
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .text-gradient-subtle {
+    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-primary-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ── GLOW EFFECTS — Multiple intensities ── */
+  .glow-sm {
+    box-shadow: 0 0 10px var(--color-primary-glow);
+  }
+  .glow-primary {
+    box-shadow: var(--shadow-glow-primary);
+  }
+  .glow-primary-strong {
+    box-shadow: 0 0 30px rgba(124,58,237,0.6), 0 0 80px rgba(124,58,237,0.3), 0 0 120px rgba(124,58,237,0.1);
+  }
+  .glow-secondary {
+    box-shadow: var(--shadow-glow-secondary);
+  }
+  .glow-accent {
+    box-shadow: 0 0 20px var(--color-accent-glow), 0 0 60px var(--color-accent-glow);
+  }
+
+  /* ── TEXT GLOW ── */
+  .glow-text-sm {
+    text-shadow: 0 0 8px var(--color-primary-glow);
+  }
+  .glow-text-primary {
+    text-shadow: 0 0 20px var(--color-primary-glow),
+                 0 0 40px var(--color-primary-glow);
+  }
+  .glow-text-strong {
+    text-shadow: 0 0 20px var(--color-primary-glow),
+                 0 0 40px var(--color-primary-glow),
+                 0 0 80px var(--color-primary-glow);
+  }
+
+  /* ── CARD STYLES ── */
+  .card-fantasy {
+    background: var(--gradient-card-bg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-border-primary);
+    border-radius: 16px;
+  }
+  .card-fantasy-hover {
+    background: var(--gradient-card-bg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-border-primary);
+    border-radius: 16px;
+    transition: all var(--transition-normal);
+  }
+  .card-fantasy-hover:hover {
+    border-color: var(--color-border-glow);
+    box-shadow: var(--shadow-card), var(--shadow-glow-primary);
+    transform: translateY(-2px);
+  }
+
+  /* ── BORDER GLOW ── */
+  .border-glow {
+    border: 1px solid var(--color-border-glow);
+    box-shadow: inset 0 0 20px var(--color-primary-glow);
+  }
+  .border-glow-subtle {
+    border: 1px solid var(--color-border-primary);
+    box-shadow: inset 0 0 8px rgba(124, 58, 237, 0.1);
+  }
+  .border-shimmer {
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+  .border-shimmer::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-secondary),
+      var(--color-accent),
+      var(--color-primary)
+    );
+    background-size: 300% 300%;
+    animation: shimmer-border 4s ease infinite;
+    z-index: -1;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    padding: 1px;
+  }
+
+  /* ── FONT FAMILIES ── */
+  .font-display { font-family: var(--font-display); }
+  .font-mono    { font-family: var(--font-mono); }
+
+  /* ── HOLOGRAPHIC SHIMMER ── */
+  .holographic {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-light),
+      var(--color-accent),
+      var(--color-secondary-light),
+      var(--color-primary-light)
+    );
+    background-size: 300% 300%;
+    animation: holographic-shift 4s ease infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ── MAGICAL ORB GLOW (background decoration) ── */
+  .orb-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.15;
+    pointer-events: none;
+    animation: glow-breathe 6s ease-in-out infinite;
+  }
+  .orb-glow-primary {
+    background: var(--color-primary);
+  }
+  .orb-glow-secondary {
+    background: var(--color-secondary);
+  }
+  .orb-glow-accent {
+    background: var(--color-accent);
+  }
+
+  /* ── OVERLAY ── */
+  .overlay-dark {
+    background: var(--gradient-overlay);
+  }
+  .overlay-vignette {
+    background: radial-gradient(ellipse at center, transparent 40%, var(--color-bg-primary) 100%);
+  }
+
+  /* ── FOCUS RING (accessibility) ── */
+  .focus-ring {
+    outline: none;
+  }
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--color-primary-light);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+
+  /* ── MAGICAL DIVIDER ── */
+  .divider-magical {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--color-border-glow) 30%,
+      var(--color-primary) 50%,
+      var(--color-border-glow) 70%,
+      transparent 100%
+    );
+    border: none;
+    opacity: 0.6;
+  }
+
+  /* ── HIDE SCROLLBAR (tetap bisa scroll) ── */
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   KEYFRAME ANIMATIONS
+   Semua animasi CSS terpusat di sini
+   ═══════════════════════════════════════════ */
+
+/* Holographic shimmer gradient shift */
+@keyframes holographic-shift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* Shimmer border rotation */
+@keyframes shimmer-border {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* Floating element — naik turun halus */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-12px); }
+}
+
+/* Floating element — lebih subtle */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%      { transform: translateY(-6px) rotate(0.5deg); }
+  66%      { transform: translateY(-3px) rotate(-0.3deg); }
+}
+
+/* Glow pulse — nafas cahaya */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 1; }
+}
+
+/* Glow breathe — nafas cahaya lebih smooth */
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50%      { opacity: 0.25; transform: scale(1.05); }
+}
+
+/* Aurora shift — pergerakan aurora */
+@keyframes aurora-shift {
+  0%   { transform: translateX(-20%) skewX(-5deg); opacity: 0.3; }
+  50%  { transform: translateX(20%)  skewX(5deg);  opacity: 0.6; }
+  100% { transform: translateX(-20%) skewX(-5deg); opacity: 0.3; }
+}
+
+/* Star twinkle */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%      { opacity: 1;   transform: scale(1.2); }
+}
+
+/* Particle rise — partikel naik ke atas (uses --drift per element) */
+@keyframes particle-rise {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.8; }
+  100% { transform: translateY(-110vh) translateX(var(--drift, 20px)); opacity: 0; }
+}
+
+/* Magical spin — rotasi lambat untuk ornamen */
+@keyframes rune-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Slide in from bottom */
+@keyframes slide-up {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Slide in from top */
+@keyframes slide-down {
+  from { transform: translateY(-30px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+/* Fade in */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Scale pulse — subtle size breathing */
+@keyframes scale-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.02); }
+}
+
+/* Shimmer sweep — light sweep across element */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%)  skewX(-15deg); }
+}
+
+/* Magical entrance — blur + scale + fade */
+@keyframes magical-entrance {
+  0%   { opacity: 0; transform: scale(0.9) translateY(20px); filter: blur(8px); }
+  100% { opacity: 1; transform: scale(1)   translateY(0);    filter: blur(0px); }
+}
+
+/* ─────────────────────────────────────────
+   REDUCED MOTION — Accessibility
+   Menghormati preferensi user
+   ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

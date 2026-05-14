@@ -1,0 +1,260 @@
+/* ============================================================
+   FANTASY REALM — GLOBAL STYLES
+   CSS Custom Properties di-inject oleh ThemeContext.tsx
+   File ini hanya mendefinisikan default fallback & base styles
+   ============================================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────
+   FONT IMPORTS
+   ───────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─────────────────────────────────────────
+   CSS CUSTOM PROPERTIES — DEFAULT VALUES
+   Akan di-override oleh ThemeContext saat mount
+   ───────────────────────────────────────── */
+:root {
+  /* Background */
+  --color-bg-primary:      #05030F;
+  --color-bg-secondary:    #0A0618;
+  --color-bg-tertiary:     #110B24;
+  --color-bg-glass:        rgba(17, 11, 36, 0.6);
+
+  /* Primary */
+  --color-primary:         #7C3AED;
+  --color-primary-glow:    rgba(124, 58, 237, 0.4);
+  --color-primary-light:   #A78BFA;
+
+  /* Secondary */
+  --color-secondary:       #2563EB;
+  --color-secondary-glow:  rgba(37, 99, 235, 0.35);
+  --color-secondary-light: #60A5FA;
+
+  /* Accent */
+  --color-accent:          #F59E0B;
+  --color-accent-glow:     rgba(245, 158, 11, 0.4);
+
+  /* Text */
+  --color-text-primary:    #F3F0FF;
+  --color-text-secondary:  #C4B5FD;
+  --color-text-muted:      #6B5FA0;
+
+  /* Border */
+  --color-border-primary:  rgba(124, 58, 237, 0.3);
+  --color-border-glow:     rgba(124, 58, 237, 0.6);
+
+  /* Background Effects */
+  --color-star:            #E0D7FF;
+  --color-aurora-1:        #7C3AED;
+  --color-aurora-2:        #2563EB;
+  --color-particle:        #A78BFA;
+  --color-fog:             rgba(124, 58, 237, 0.08);
+
+  /* Gradients */
+  --gradient-hero-bg:      radial-gradient(ellipse at 50% 0%, #1A0A3C 0%, #05030F 60%);
+  --gradient-card-bg:      linear-gradient(135deg, rgba(17,11,36,0.9) 0%, rgba(10,6,24,0.95) 100%);
+  --gradient-text:         linear-gradient(135deg, #F3F0FF 0%, #A78BFA 50%, #F59E0B 100%);
+  --gradient-button:       linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%);
+  --gradient-glow:         radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%);
+  --gradient-overlay:      linear-gradient(to bottom, transparent 0%, rgba(5,3,15,0.8) 100%);
+
+  /* Shadows */
+  --shadow-glow-primary:   0 0 20px rgba(124,58,237,0.5), 0 0 60px rgba(124,58,237,0.2);
+  --shadow-glow-secondary: 0 0 20px rgba(37,99,235,0.5), 0 0 60px rgba(37,99,235,0.2);
+  --shadow-card:           0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+
+  /* Blur */
+  --blur-glass:            blur(16px);
+  --blur-modal:            blur(24px);
+
+  /* Typography */
+  --font-display:          'Cinzel', serif;
+  --font-body:             'Inter', sans-serif;
+  --font-mono:             'JetBrains Mono', monospace;
+
+  /* Transition (untuk theme switching) */
+  --transition-theme:      background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ─────────────────────────────────────────
+   BASE RESET & BODY
+   ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+
+  /* Transisi halus saat ganti tema */
+  transition: var(--transition-theme);
+}
+
+/* ─────────────────────────────────────────
+   SCROLLBAR CUSTOM
+   ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
+}
+
+/* ─────────────────────────────────────────
+   SELECTION COLOR
+   ───────────────────────────────────────── */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-text-primary);
+}
+
+/* ─────────────────────────────────────────
+   UTILITY CLASSES BERBASIS CSS VARIABLES
+   Bisa digunakan di className komponen manapun
+   ───────────────────────────────────────── */
+@layer utilities {
+
+  /* Glassmorphism */
+  .glass {
+    background: var(--color-bg-glass);
+    backdrop-filter: var(--blur-glass);
+    -webkit-backdrop-filter: var(--blur-glass);
+    border: 1px solid var(--color-border-primary);
+  }
+
+  .glass-strong {
+    background: var(--color-bg-glass);
+    backdrop-filter: var(--blur-modal);
+    -webkit-backdrop-filter: var(--blur-modal);
+    border: 1px solid var(--color-border-glow);
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: var(--shadow-glow-primary);
+  }
+
+  .glow-secondary {
+    box-shadow: var(--shadow-glow-secondary);
+  }
+
+  .glow-text-primary {
+    text-shadow: 0 0 20px var(--color-primary-glow),
+                 0 0 40px var(--color-primary-glow);
+  }
+
+  /* Card */
+  .card-fantasy {
+    background: var(--gradient-card-bg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-border-primary);
+    border-radius: 12px;
+  }
+
+  /* Border glow */
+  .border-glow {
+    border: 1px solid var(--color-border-glow);
+    box-shadow: inset 0 0 20px var(--color-primary-glow);
+  }
+
+  /* Font families */
+  .font-display { font-family: var(--font-display); }
+  .font-mono    { font-family: var(--font-mono); }
+
+  /* Holographic shimmer */
+  .holographic {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-light),
+      var(--color-accent),
+      var(--color-secondary-light),
+      var(--color-primary-light)
+    );
+    background-size: 300% 300%;
+    animation: holographic-shift 4s ease infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* ─────────────────────────────────────────
+   KEYFRAME ANIMATIONS
+   ───────────────────────────────────────── */
+@keyframes holographic-shift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+@keyframes aurora-shift {
+  0%   { transform: translateX(-20%) skewX(-5deg); opacity: 0.3; }
+  50%  { transform: translateX(20%)  skewX(5deg);  opacity: 0.6; }
+  100% { transform: translateX(-20%) skewX(-5deg); opacity: 0.3; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%       { opacity: 1;   transform: scale(1.2); }
+}
+
+@keyframes particle-rise {
+  0%   { transform: translateY(0)    translateX(0)   opacity: 0;   }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.8; }
+  100% { transform: translateY(-80vh) translateX(20px) opacity: 0; }
+}
+
+/* ─────────────────────────────────────────
+   REDUCED MOTION
+   ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
