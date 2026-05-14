@@ -14,12 +14,12 @@ export const SITE_CONFIG: SiteConfig = {
   name: 'Akhmad Najib Alfaizi',
   tagline: 'Full-Stack Developer & Digital Sorcerer',
   description: 'Welcome to my digital realm — a gateway to all my creations, projects, and adventures in code.',
-  url: 'https://yourdomain.com',
-  author: 'Your Name',
+  url: 'https://alfaizi-linktree.vercel.app/',
+  author: 'Akhmad Najib Alfaizi',
   socials: {
     github: 'https://github.com/Najebb',
-    twitter: 'https://twitter.com/yourusername',
-    linkedin: 'https://linkedin.com/in/yourusername',
+    // twitter: 'https://twitter.com/yourusername',
+    // linkedin: 'https://linkedin.com/in/yourusername',
   },
 };
 
@@ -41,15 +41,9 @@ export const LINK_ITEMS: NavItem[] = [
     external: true,
   },
   {
-    label: '💼 LinkedIn',
-    href: 'https://linkedin.com/in/yourusername',
-    icon: 'linkedin',
-    external: true,
-  },
-  {
-    label: '🐦 Twitter / X',
-    href: 'https://twitter.com/yourusername',
-    icon: 'twitter',
+    label: '💬 WhatsApp',
+    href: 'https://wa.me/6285275281166', // Ganti dengan nomor asli Anda
+    icon: 'whatsapp',
     external: true,
   },
   {
@@ -92,21 +86,21 @@ export const PROJECT_CARDS: ProjectCardData[] = [
     featured: true,
   },
   {
-    id: 'linkedin',
-    title: 'Professional Network',
-    description: 'Connect dan lihat pengalaman profesional saya di LinkedIn.',
-    icon: '💼',
-    techStack: ['Networking', 'Career'],
-    url: 'https://linkedin.com/in/yourusername',
+    id: 'whatsapp',
+    title: 'Direct Message',
+    description: 'Hubungi saya langsung via WhatsApp untuk diskusi, tawaran kerja, atau sekadar menyapa.',
+    icon: '💬',
+    techStack: ['Chat', 'Fast Response'],
+    url: 'https://wa.me/6285275281166', // Ganti dengan nomor asli Anda
     external: true,
   },
   {
-    id: 'twitter',
-    title: 'Thoughts & Updates',
-    description: 'Ikuti thread teknis, opini, dan update terbaru saya.',
-    icon: '🐦',
-    techStack: ['Tech', 'Design', 'Dev'],
-    url: 'https://twitter.com/yourusername',
+    id: 'instagram',
+    title: 'Visual Journey',
+    description: 'Lihat keseharian, inspirasi, dan karya visual saya di Instagram.',
+    icon: '📸',
+    techStack: ['Social', 'Lifestyle', 'Design'],
+    url: 'https://instagram.com/alfaizie_',
     external: true,
   },
   {
@@ -115,7 +109,7 @@ export const PROJECT_CARDS: ProjectCardData[] = [
     description: 'Bergabung di server Discord untuk diskusi, kolaborasi, dan berbagi ide.',
     icon: '🎮',
     techStack: ['Community', 'Chat'],
-    url: 'https://discord.gg/yourserver',
+    url: 'https://discord.gg/qharnkEKx',
     external: true,
   },
   {
@@ -123,7 +117,7 @@ export const PROJECT_CARDS: ProjectCardData[] = [
     title: 'Get in Touch',
     description: 'Ada ide kolaborasi atau pertanyaan? Kirim email langsung ke saya.',
     icon: '📧',
-    url: 'mailto:you@example.com',
+    url: 'mailto:akhmadnajibalfaizi@gmail.com',
     external: true,
   },
 ];
